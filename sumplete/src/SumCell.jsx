@@ -1,6 +1,6 @@
-const SumCell = () => {
-  return <div>
-    sum
+const SumCell = ({number}) => {
+  return <div className="cell">
+    {number}
   </div>
 }
 

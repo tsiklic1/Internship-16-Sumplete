@@ -1,5 +1,5 @@
 import Board from "./Board";
-import { generateNumbers } from "./generate";
+import { numberObjects, rowSums, columnSums } from "./generate";
 import "./index.css";
 
 function App() {
@@ -11,7 +11,11 @@ function App() {
           Delete numbers so each row/column adds up to the target number at the
           right/bottom.
         </h2>
-        <Board numbersList={generateNumbers()} />
+        <Board
+          numbersList={numberObjects}
+          rowSumsList={rowSums}
+          columnSumsList={columnSums}
+        />
       </div>
     </div>
   );
