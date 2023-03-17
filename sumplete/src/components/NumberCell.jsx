@@ -1,34 +1,37 @@
-import { numberCellStatus } from "../constants/numberCellStatus"
+import { numberCellStatus } from "../constants/numberCellStatus";
 
-const log = console.log;
-
-const NumberCell = ({number, setBoard, gridItemId}) => {
-  const handleClick = ()=>{
-    console.log("clicked")
+const NumberCell = ({ number, setBoard, gridItemId }) => {
+  const handleClick = () => {
+    console.log("clicked");
     setBoard((prev) => {
-      console.log("set")
+      console.log("set");
       const prevGrid = [...prev];
-      for (let gridItem of prevGrid){
-        if(gridItem.id === gridItemId){
-          console.log(gridItem)
-          if(gridItem.status === numberCellStatus.empty){
-            gridItem.status = numberCellStatus.crossed
+      for (let gridItem of prevGrid) {
+        if (gridItem.id === gridItemId) {
+          console.log(gridItem);
+          if (gridItem.status === numberCellStatus.empty) {
+            gridItem.status = numberCellStatus.crossed;
+          } else if (gridItem.status === numberCellStatus.crossed) {
+            gridItem.status = numberCellStatus.circled;
+          } else if (gridItem.status === numberCellStatus.circled) {
+            gridItem.status = numberCellStatus.empty;
           }
-          else if (gridItem.status === numberCellStatus.crossed){
-            gridItem.status = numberCellStatus.circled
-          }
-          else if (gridItem.status === numberCellStatus.circled){
-            gridItem.status = numberCellStatus.empty
-          }
+        }
       }
-    }
-    return prevGrid
-    })
-  }
+      return prevGrid;
+    });
+  };
 
-  return <div className="cell number" onClick = {()=>{handleClick()}}>
-    {number}
-  </div>
-}
+  return (
+    <div
+      className="cell number"
+      onClick={() => {
+        handleClick();
+      }}
+    >
+      {number}
+    </div>
+  );
+};
 
-export default NumberCell
+export default NumberCell;
