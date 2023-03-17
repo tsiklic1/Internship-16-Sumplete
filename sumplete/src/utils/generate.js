@@ -1,3 +1,5 @@
+import { numberCellStatus } from "../constants/numberCellStatus";
+
 export const grid = Array.from(Array(15).fill(), (x, i) => {
   return {
     id: i + 1,
@@ -15,6 +17,7 @@ const generate = () => {
       let cell = grid[index];
       cell.content = randomNumber;
       cell.classList = "number";
+      cell.status = numberCellStatus.empty;
       if (Math.random() < 0.5) {
         cell.isCorrect = true;
       }
@@ -51,7 +54,6 @@ const generate = () => {
     cell.content = sum;
     cell.classList = "vanswer";
   }
-  console.log(grid);
 };
 
 // const check = () => {
