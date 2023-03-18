@@ -6,8 +6,8 @@ export const grid = Array.from(Array(15).fill(), (x, i) => {
   };
 });
 
-const gridSize = 4;
-const numberSize = gridSize - 1;
+export const gridSize = 4;
+export const numberSize = gridSize - 1;
 
 const generate = () => {
   for (let i = 0; i < numberSize; i++) {
@@ -38,6 +38,7 @@ const generate = () => {
     let cell = grid[index];
     cell.content = sum;
     cell.classList = "hanswer";
+    cell.correct = false;
   }
 
   for (let j = 0; j < numberSize; j++) {
@@ -53,6 +54,7 @@ const generate = () => {
     let cell = grid[index];
     cell.content = sum;
     cell.classList = "vanswer";
+    cell.correct = false;
   }
 };
 

@@ -57,3 +57,12 @@ h2 {
   border: 1px solid black;
   background: white;
 }
+
+/* vratit se - sumplete je bia down kad si ovo radia */
+.crossed {
+  background-color: #ff000066;
+}
+
+.circled {
+  background-color: #00ff0066;
+}

@@ -1,10 +1,9 @@
 import { numberCellStatus } from "../constants/numberCellStatus";
+import clsx from "clsx";
 
-const NumberCell = ({ number, setBoard, gridItemId }) => {
+const NumberCell = ({ number, board, setBoard, gridItemId }) => {
   const handleClick = () => {
-    console.log("clicked");
     setBoard((prev) => {
-      console.log("set");
       const prevGrid = [...prev];
       for (let gridItem of prevGrid) {
         if (gridItem.id === gridItemId) {
@@ -24,7 +23,17 @@ const NumberCell = ({ number, setBoard, gridItemId }) => {
 
   return (
     <div
-      className="cell number"
+      className={`cell number ${clsx({
+        empty:
+          board.find((cell) => cell.id === gridItemId).status ===
+          numberCellStatus.empty,
+        crossed:
+          board.find((cell) => cell.id === gridItemId).status ===
+          numberCellStatus.crossed,
+        circled:
+          board.find((cell) => cell.id === gridItemId).status ===
+          numberCellStatus.circled,
+      })}`}
       onClick={() => {
         handleClick();
       }}

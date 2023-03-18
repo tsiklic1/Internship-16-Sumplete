@@ -2,26 +2,25 @@ import NumberCell from "./NumberCell";
 import SumCell from "./SumCell";
 import { useState } from "react";
 import { grid } from "../utils/generate";
+import clsx from "clsx";
+import { check } from "../utils/check";
 
-const Board = ({ numbersList, rowSumsList, columnSumsList }) => {
+const Board = () => {
   const [board, setBoard] = useState(grid);
+  check();
   return (
     <div className="board">
       {grid.map((gridItem) =>
         gridItem.classList === "number" ? (
           <NumberCell
-            className="number-cell"
             key={gridItem.id}
             gridItemId={gridItem.id}
             number={gridItem.content}
+            board={board}
             setBoard={setBoard}
           />
         ) : (
-          <SumCell
-            className="sum-cell"
-            key={gridItem.id}
-            number={gridItem.content}
-          />
+          <SumCell key={gridItem.id} number={gridItem.content} />
         )
       )}
 
