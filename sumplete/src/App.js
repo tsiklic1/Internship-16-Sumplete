@@ -1,8 +1,11 @@
 import Board from "./components/Board";
-
+import { useState } from "react";
+import { grid } from "./utils/generate";
 import "./index.css";
 
 function App() {
+  const [board, setBoard] = useState(grid);
+
   return (
     <div className="App">
       <div>
@@ -11,7 +14,7 @@ function App() {
           Delete numbers so each row/column adds up to the target number at the
           right/bottom.
         </h2>
-        <Board />
+        <Board board={board} setBoard={setBoard} />
       </div>
     </div>
   );

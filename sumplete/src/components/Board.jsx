@@ -1,19 +1,28 @@
 import NumberCell from "./NumberCell";
 import SumCell from "./SumCell";
 import { useState } from "react";
-import { grid, generate } from "../utils/generate";
+import { grid, generate, numberSize } from "../utils/generate";
 import { check } from "../utils/check";
 import { useEffect } from "react";
+import { WinMessage } from "./WinMessage";
 
 generate();
 
-const Board = () => {
-  const [board, setBoard] = useState(grid);
-
+const Board = ({ board, setBoard }) => {
   useEffect(() => {
     console.log("useeff");
     check(setBoard);
   }, []);
+
+  const countCorrectSums = () => {
+    let numberOfCorrectSums = 0;
+    for (let cell of board) {
+      if (cell.correct) {
+        numberOfCorrectSums++;
+      }
+    }
+    return numberOfCorrectSums;
+  };
 
   return (
     <div className="board">
@@ -34,8 +43,7 @@ const Board = () => {
           />
         )
       )}
-
-      <pre>{JSON.stringify(board, null, 2)}</pre>
+      <div>{countCorrectSums() === numberSize * 2 && <WinMessage />}</div>
     </div>
   );
 };
