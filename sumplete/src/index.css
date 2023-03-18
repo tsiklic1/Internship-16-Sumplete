@@ -66,3 +66,11 @@ h2 {
 .circled {
   background-color: #00ff0066;
 }
+
+.answer {
+  color: #aba2a2;
+}
+
+.correct {
+  color: black;
+}

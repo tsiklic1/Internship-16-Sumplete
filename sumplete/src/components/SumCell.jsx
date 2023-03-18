@@ -1,7 +1,11 @@
-const SumCell = ({number}) => {
-  return <div className="cell">
-    {number}
-  </div>
-}
+import clsx from "clsx";
 
-export default SumCell
+const SumCell = ({ number, isCorrect }) => {
+  return (
+    <div className={`cell answer ${clsx({ correct: isCorrect })}`}>
+      {number}
+    </div>
+  );
+};
+
+export default SumCell;

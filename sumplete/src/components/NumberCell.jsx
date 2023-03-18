@@ -1,5 +1,6 @@
 import { numberCellStatus } from "../constants/numberCellStatus";
 import clsx from "clsx";
+import { check } from "../utils/check";
 
 const NumberCell = ({ number, board, setBoard, gridItemId }) => {
   const handleClick = () => {
@@ -7,7 +8,6 @@ const NumberCell = ({ number, board, setBoard, gridItemId }) => {
       const prevGrid = [...prev];
       for (let gridItem of prevGrid) {
         if (gridItem.id === gridItemId) {
-          console.log(gridItem);
           if (gridItem.status === numberCellStatus.empty) {
             gridItem.status = numberCellStatus.crossed;
           } else if (gridItem.status === numberCellStatus.crossed) {
@@ -17,6 +17,7 @@ const NumberCell = ({ number, board, setBoard, gridItemId }) => {
           }
         }
       }
+      check(setBoard);
       return prevGrid;
     });
   };

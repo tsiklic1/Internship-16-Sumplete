@@ -1,13 +1,20 @@
 import NumberCell from "./NumberCell";
 import SumCell from "./SumCell";
 import { useState } from "react";
-import { grid } from "../utils/generate";
-import clsx from "clsx";
+import { grid, generate } from "../utils/generate";
 import { check } from "../utils/check";
+import { useEffect } from "react";
+
+generate();
 
 const Board = () => {
   const [board, setBoard] = useState(grid);
-  check();
+
+  useEffect(() => {
+    console.log("useeff");
+    check(setBoard);
+  }, []);
+
   return (
     <div className="board">
       {grid.map((gridItem) =>
@@ -20,7 +27,11 @@ const Board = () => {
             setBoard={setBoard}
           />
         ) : (
-          <SumCell key={gridItem.id} number={gridItem.content} />
+          <SumCell
+            key={gridItem.id}
+            number={gridItem.content}
+            isCorrect={gridItem.correct}
+          />
         )
       )}
 

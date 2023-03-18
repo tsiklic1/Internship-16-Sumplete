@@ -9,7 +9,7 @@ export const grid = Array.from(Array(15).fill(), (x, i) => {
 export const gridSize = 4;
 export const numberSize = gridSize - 1;
 
-const generate = () => {
+export const generate = () => {
   for (let i = 0; i < numberSize; i++) {
     for (let j = 0; j < numberSize; j++) {
       let randomNumber = Math.floor(Math.random() * 9) + 1;
@@ -57,15 +57,3 @@ const generate = () => {
     cell.correct = false;
   }
 };
-
-// const check = () => {
-//   for (let i = 0; i < numberSize; i++){
-//     let sum = 0;
-//     for (let j = 0; j < numberSize; j++){
-//       let index = i * gridSize + j
-//       let cell = grid[index]
-//     }
-//   }
-// }
-
-generate();
