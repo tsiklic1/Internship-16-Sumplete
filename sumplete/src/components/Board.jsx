@@ -1,18 +1,19 @@
 import NumberCell from "./NumberCell";
 import SumCell from "./SumCell";
-import { useState } from "react";
+import { useRef } from "react";
 import { grid, generate, numberSize } from "../utils/generate";
 import { check } from "../utils/check";
 import { useEffect } from "react";
 import { WinMessage } from "./WinMessage";
-
+import NewGame from "./NewGame";
+import RestartButton from "./RestartButton";
 generate();
 
 const Board = ({ board, setBoard }) => {
+  const regenerated = useRef(false);
   useEffect(() => {
-    console.log("useeff");
     check(setBoard);
-  }, []);
+  }, [setBoard]);
 
   const countCorrectSums = () => {
     let numberOfCorrectSums = 0;
@@ -34,6 +35,7 @@ const Board = ({ board, setBoard }) => {
             number={gridItem.content}
             board={board}
             setBoard={setBoard}
+            countCorrectSums={countCorrectSums}
           />
         ) : (
           <SumCell
@@ -43,7 +45,17 @@ const Board = ({ board, setBoard }) => {
           />
         )
       )}
-      <div>{countCorrectSums() === numberSize * 2 && <WinMessage />}</div>
+      <div>
+        {countCorrectSums() === numberSize * 2 ? (
+          <div className="win-content-container">
+            {" "}
+            <WinMessage />{" "}
+            <NewGame setBoard={setBoard} regenerated={regenerated} />
+          </div>
+        ) : (
+          <RestartButton setBoard={setBoard} />
+        )}
+      </div>
     </div>
   );
 };

@@ -13,11 +13,8 @@ export const check = (setBoard) => {
   }
 
   if (numberOfCorrectSums === numberSize * 2) {
-    console.log("RIŠIA");
-
     setBoard((prev) => {
       const prevGrid = [...prev];
-
       for (let gridItem of prevGrid) {
         if (!(gridItem.status === numberCellStatus.crossed)) {
           gridItem.status = numberCellStatus.circled;
@@ -25,12 +22,14 @@ export const check = (setBoard) => {
       }
       return prevGrid;
     });
+    return true;
   }
 
   setBoard((prev) => {
     const prevCopy = [...prev];
     return prevCopy;
   });
+  // return false;
 };
 
 const checkRows = () => {

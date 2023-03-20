@@ -1,9 +1,19 @@
 import { numberCellStatus } from "../constants/numberCellStatus";
-import clsx from "clsx";
 import { check } from "../utils/check";
+import { numberSize } from "../utils/generate";
 
-const NumberCell = ({ number, board, setBoard, gridItemId }) => {
+const NumberCell = ({
+  number,
+  board,
+  setBoard,
+  gridItemId,
+  countCorrectSums,
+}) => {
   const handleClick = () => {
+    if (countCorrectSums() === numberSize * 2) {
+      return;
+    }
+
     setBoard((prev) => {
       const prevGrid = [...prev];
       for (let gridItem of prevGrid) {
@@ -24,22 +34,30 @@ const NumberCell = ({ number, board, setBoard, gridItemId }) => {
 
   return (
     <div
-      className={`cell number ${clsx({
-        empty:
-          board.find((cell) => cell.id === gridItemId).status ===
-          numberCellStatus.empty,
-        crossed:
-          board.find((cell) => cell.id === gridItemId).status ===
-          numberCellStatus.crossed,
-        circled:
-          board.find((cell) => cell.id === gridItemId).status ===
-          numberCellStatus.circled,
-      })}`}
+      className={`cell number`}
       onClick={() => {
         handleClick();
       }}
     >
       {number}
+
+      {board.find((cell) => cell.id === gridItemId).status ===
+        numberCellStatus.crossed && (
+        <div className="red-cross-img">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ff0000"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </div>
+      )}
+
+      {board.find((cell) => cell.id === gridItemId).status ===
+        numberCellStatus.circled && <div className="green-circle"></div>}
     </div>
   );
 };

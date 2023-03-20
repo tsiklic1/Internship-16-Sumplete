@@ -20,6 +20,8 @@ export const generate = () => {
       cell.status = numberCellStatus.empty;
       if (Math.random() < 0.5) {
         cell.isCorrect = true;
+      } else {
+        cell.isCorrect = false;
       }
       grid[index] = cell;
     }
